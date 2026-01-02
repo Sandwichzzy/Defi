@@ -50,14 +50,12 @@ contract RepayTest is Test {
         assertEq(debt0, target.getVariableDebt(DAI), "debt 0");
 
         skip(7 * 24 * 3600);
-
         uint256 debt1 = debtToken.balanceOf(address(target));
         console.log("Debt: %e", debt1);
         assertEq(debt1, target.getVariableDebt(DAI), "debt 1");
-
         // Test repay
         assertGt(debtToken.balanceOf(address(target)), 0, "debt before repay");
-        assertGt(dai.balanceOf(address(target)), 0, "DAI before repay");
+        assertGt(dai.balanceOf(address(target)), 0, "debt before repay");
 
         uint256 repaid = target.repay(DAI);
 
