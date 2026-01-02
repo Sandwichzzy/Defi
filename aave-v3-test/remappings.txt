@@ -1,0 +1,2 @@
+@exercises/=src/exercises/
+forge-std/=lib/forge-std/src/
