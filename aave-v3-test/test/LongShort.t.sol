@@ -56,7 +56,7 @@ contract LongShortTest is Test {
                 swapData: swapData
             })
         );
-
+        //  Collateral amount out: 3.27073091901618274e17
         console.log("Collateral amount out: %e", collateralAmountOut);
         assertGt(collateralAmountOut, 0, "collateral amount out = 0");
         assertEq(
