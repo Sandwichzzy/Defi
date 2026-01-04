@@ -2,16 +2,9 @@
 pragma solidity 0.8.24;
 
 import {Test, console2} from "forge-std/Test.sol";
-import {IUniswapV3Factory} from
-    "../src/interfaces/uniswap-v3/IUniswapV3Factory.sol";
-import {IUniswapV3Pool} from
-    "../src/interfaces/uniswap-v3/IUniswapV3Pool.sol";
-import {
-    UNISWAP_V3_FACTORY,
-    DAI,
-    USDC,
-    UNISWAP_V3_POOL_DAI_USDC_100
-} from "../src/Constants.sol";
+import {IUniswapV3Factory} from "../src/interfaces/uniswap-v3/IUniswapV3Factory.sol";
+import {IUniswapV3Pool} from "../src/interfaces/uniswap-v3/IUniswapV3Pool.sol";
+import {UNISWAP_V3_FACTORY, DAI, USDC, UNISWAP_V3_POOL_DAI_USDC_100} from "../src/Constants.sol";
 import {ERC20} from "../src/ERC20.sol";
 
 contract UniswapV3FactoryTest is Test {
@@ -28,20 +21,18 @@ contract UniswapV3FactoryTest is Test {
     }
 
     // Exercise 1 - Get the address of DAI/USDC (0.1% fee) pool
-    function test_getPool() public {
+    function test_getPool() public view {
         // Write your code here
-        address pool;
+        address pool = factory.getPool(DAI, USDC, 100);
         assertEq(pool, UNISWAP_V3_POOL_DAI_USDC_100);
     }
 
     // Exercise 2 - Deploy a new pool with tokenA and tokenB, 0.1% fee
     function test_createPool() public {
         // Write your code here
-        address pool;
-
-        (address token0, address token1) = address(tokenA) <= address(tokenB)
-            ? (address(tokenA), address(tokenB))
-            : (address(tokenB), address(tokenA));
+        address pool = factory.createPool(address(tokenA), address(tokenB), POOL_FEE);
+        (address token0, address token1) =
+            address(tokenA) <= address(tokenB) ? (address(tokenA), address(tokenB)) : (address(tokenB), address(tokenA));
 
         assertEq(IUniswapV3Pool(pool).token0(), token0);
         assertEq(IUniswapV3Pool(pool).token1(), token1);
