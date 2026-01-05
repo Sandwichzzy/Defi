@@ -14,3 +14,5 @@ forge test --match-contract SupplyTest --match-test test_supply
 
 # 加上 fork-url
 forge test --match-contract SupplyTest --fork-url $ETH_RPC_URL
+
+forge test --fork-url $FORK_URL --match-path test/UniswapV3Swap.t.sol -vvv
